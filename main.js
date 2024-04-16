@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const { Octokit } = require('@octokit/core');
 const { context } = require('@actions/github');
 const {
   paginateRest,
@@ -9,6 +8,7 @@ const { array } = require('smartarray');
 
 
 async function main() {
+    const { Octokit } = await import('@octokit/core');
 
     const owner             = core.getInput('owner');
     const repo              = core.getInput('repo');
