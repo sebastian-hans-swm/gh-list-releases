@@ -1,12 +1,11 @@
-import * as core from '@actions/core';
-import * as Octokit from '@octokit/core';
-import { context } from '@actions/github';
-import {
+const core = require('@actions/core');
+const { Octokit } = require('@octokit/core');
+const { context } = require('@actions/github');
+const {
   paginateRest,
   composePaginateRest,
-} from '@octokit/plugin-paginate-rest';
-import * as array from 'smartarray';
-import * as os from 'os';
+} = require('@octokit/plugin-paginate-rest');
+const { array } = require('smartarray');
 
 
 async function main() {
@@ -21,7 +20,7 @@ async function main() {
     const nb_results        = core.getInput('nb_results');
     const skip_from_release = core.getInput('skip_from_release');
     const start_addition    = skip_from_release === 'true' ? 1 : 0
-    const exclude_ranges    = core.getInput('exclude_ranges').replace(new RegExp(os.EOL, 'gm'), '\\n');
+    const exclude_ranges    = core.getInput('exclude_ranges').replace(new RegExp(require('os').EOL, 'gm'), '\\n');
     const regex_filter      = core.getInput('regex_filter');
 
     const MyOctokit = Octokit.plugin(paginateRest);
